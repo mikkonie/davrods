@@ -83,7 +83,13 @@ const davrods_dir_conf_t default_config = {
     // there's no use keeping the temporary password around for
     // longer than the maximum keepalive time. (We don't ever use
     // a temporary password more than once).
-    .rods_auth_ttl = 1, // In hours.
+
+    // NOTE: With iRODS 4.3 this can not be smaller than the value
+    // set for the password_min_time setting on the server, or auth
+    // will fail. We use the maximum minimum password time as a
+    // default, so this value must be identical. Ideally, this
+    // should be configurable with an environment variable.
+    .rods_auth_ttl = 336, // In hours.
 
     .ticket_mode       = DAVRODS_TICKET_MODE_OFF,
     .html_emit_tickets = DAVRODS_HTML_EMIT_TICKETS_ON, // no effect unless tickets on.
