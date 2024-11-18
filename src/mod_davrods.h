@@ -32,7 +32,9 @@
 #include <apr_strings.h>
 #include <mod_dav.h>
 
-module AP_MODULE_DECLARE_DATA davrods_module;
+// Workaround proposed by iRODS team in
+// https://github.com/UtrechtUniversity/davrods/issues/35
+extern module AP_MODULE_DECLARE_DATA davrods_module;
 
 // For development/debugging purposes, these compile-time flags cause large
 // amounts of extra debug messages to be written.
