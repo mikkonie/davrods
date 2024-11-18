@@ -122,7 +122,10 @@ static authn_status rods_login(
         return HTTP_INTERNAL_SERVER_ERROR;
     }
 
-    if (strlen(password) > 63) {
+    // NOTE: This hardcoded limit made it impossible to log in with
+    // a 64-character token, so it was increased. Ideally, this
+    // should be modifiable as an environment variable.
+    if (strlen(password) > 128) {
         ap_log_rerror(APLOG_MARK, APLOG_ERR, APR_SUCCESS, r,
             "Password exceeds length limits (%lu vs 63)", strlen(password));
         return HTTP_INTERNAL_SERVER_ERROR;
